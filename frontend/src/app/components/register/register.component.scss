@@ -1,0 +1,75 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px; //временно
+    @include respond-to(handhelds) {
+      width: 100%;
+    }
+    @include respond-to(medium-screens) {
+      width: 100%;
+    }
+    @include respond-to(wide-screens) {
+      width: 70%;
+    }
+
+    &-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @include respond-to(handhelds) {
+        width: 96%;
+      }
+      @include respond-to(medium-screens) {
+        width: 96%;
+      }
+      @include respond-to(wide-screens) {
+        width: 50%;
+      }
+
+      &-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        mat-label {
+          @include respond-to(handhelds) {
+            font-size: small;
+          }
+          @include respond-to(medium-screens) {
+            font-size: medium;
+          }
+          @include respond-to(wide-screens) {
+            font-size: large;
+          }
+        }
+      }
+
+      &-button {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &-register {
+          color: #fff;
+          background-color: #65a3be;
+        }
+      }
+    }
+  }
+}

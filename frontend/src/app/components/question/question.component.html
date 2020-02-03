@@ -1,0 +1,104 @@
+<section class="content">
+    <section class="content-locationBack">
+        <button mat-stroked-button (click)="locationBack()">Назад</button>
+    </section>
+    <ng-container *ngIf="!loading">
+        <ng-container *ngIf="question !== null">
+            <mat-card class="content-question">
+                <mat-card-header class="content-question-header">
+                    <span class="content-question-header-userAndDate">
+                        {{question.user}} : {{question.date}}
+                    </span>
+                </mat-card-header>
+                <mat-card-content class="content-question-content">
+                    <span class="content-question-content-description">
+                        {{question.description}}
+                    </span>
+                    <span class="content-question-content-topic">
+                        {{question.topic}}
+                    </span>
+                    <ng-container *ngIf="userName === 'admin'">
+                        <button mat-raised-button class="content-question-content-delete"
+                            (click)="deleteQuestion(question.id)">Удалить</button>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+            <section class="content-countdownСomments">
+                <section class="content-countdownСomments-line">
+                    <hr>
+                </section>
+                <span class="content-countdownСomments-title">
+                    Комментарии
+                </span>
+                <section class="content-countdownСomments-line">
+                    <hr>
+                </section>
+            </section>
+            <ng-container *ngIf="comments.length !== 0">
+                <mat-list class="content-comments" *ngFor="let c of comments">
+                    <mat-card class="content-comments-comment">
+                        <mat-card-header class="content-comments-comment-header">
+                            <span class="content-comments-comment-header-userAndDate">
+                                {{c.user}} : {{c.date}}
+                            </span>
+                        </mat-card-header>
+                        <mat-card-content class="content-comments-comment-content">
+                            <span class="content-comments-comment-content-description">
+                                {{c.description}}
+                            </span>
+                            <ng-container *ngIf="userName === 'admin'">
+                                <button mat-raised-button class="content-comments-comment-content-delete"
+                                    (click)="deleteComment(c.id)">Удалить</button>
+                            </ng-container>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-list>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="question === null">
+            <span class="content-notFound">
+                Вопрос не найден
+            </span>
+        </ng-container>
+        <ng-container *ngIf="comments.length === 0">
+            <span class="content-notFound">
+                Комментарии не найдены
+            </span>
+        </ng-container>
+        <section class="content-countdownСomments">
+            <section class="content-countdownСomments-line">
+                <hr>
+            </section>
+        </section>
+        <ng-container *ngIf="isLoggedIn">
+            <section class="content-discussion">
+                <form [formGroup]="commentForm" (keyup.enter)="addComment()" (ngSubmit)="addComment()"
+                    class="content-discussion-content">
+                    <mat-form-field class="content-discussion-content-input">
+                        <textarea formControlName="comment" matInput matTextareaAutosize matAutosizeMinRows=4
+                            placeholder="Ваш комментарий"></textarea>
+                        <mat-error *ngIf="commentForm.get('comment').hasError('required')">
+                            Комментарий должен содержать минимум 1 символ
+                        </mat-error>
+                        <mat-error *ngIf="commentForm.get('comment').hasError('maxlength')">
+                            Комментарий не может содержать более 200 символов
+                        </mat-error>
+                    </mat-form-field>
+                    <button class="content-discussion-content-button" mat-stroked-button [disabled]="loading">
+                        <span *ngIf="!loading"></span>
+                        Добавить
+                    </button>
+                </form>
+            </section>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+            <section class="content-notauthorized">
+                Пожалуйста авторизуйтесь, чтоб иметь возможность оставлять комментарии.
+            </section>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="loading">
+        <mat-spinner class="content-spinner"></mat-spinner>
+    </ng-container>
+</section>

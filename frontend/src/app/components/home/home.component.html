@@ -1,0 +1,50 @@
+<section class="content">
+    <section class="content-questionAdd">
+        <button class="content-questionAdd-button" mat-stroked-button (click)="questionAdd()">Добавить вопрос</button>
+    </section>
+    <form [formGroup]="searchForm" (ngSubmit)="search()" class="content-search">
+        <!--<input class="content-search-input" type="text" id="search" name="search" placeholder="Поиск">-->
+        <mat-form-field class="content-search-input">
+            <mat-label>Выбранная тема</mat-label>
+            <mat-select formControlName="topic">
+                <!--<mat-optgroup *ngFor="let group of topicGroup" [label]="group.name">-->
+                <mat-option *ngFor="let topic of topics" [value]="topic">
+                    {{topic}}
+                </mat-option>
+                <!--</mat-optgroup>-->
+            </mat-select>
+        </mat-form-field>
+        <button class="content-search-button" mat-stroked-button [disabled]="loading">
+            <span *ngIf="!loading"></span>
+        </button>
+    </form>
+    <ng-container *ngIf="!loading">
+        <ng-container *ngIf="questions">
+            <mat-list class="content-questions" *ngFor="let q of questions">
+                <mat-card class="content-questions-question" (click)="navigateTo(q.id)">
+                    <mat-card-header class="content-questions-question-header">
+                        <span class="content-questions-question-header-userAndDate">
+                            {{q.user}} : {{q.date}}
+                        </span>
+                    </mat-card-header>
+                    <mat-card-content class="content-questions-question-content">
+                        <span class="content-questions-question-content-description">
+                            {{q.description}}
+                        </span>
+                        <span class="content-questions-question-content-topic">
+                            {{q.topic}}
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+            </mat-list>
+        </ng-container>
+        <ng-container *ngIf="questions.length === 0">
+            <span class="content-notFound">
+                Вопросы не найдены
+            </span>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="loading">
+        <mat-spinner class="content-spinner"></mat-spinner>
+    </ng-container>
+</section>

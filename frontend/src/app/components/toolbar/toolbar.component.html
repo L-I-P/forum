@@ -1,0 +1,9 @@
+<mat-toolbar>
+    <span><a routerLink="">Форум</a></span>
+    <ng-container *ngIf="!isLoggedIn">
+        <button mat-stroked-button class="buttonLogin" (click)="login()">Войти</button>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+        <button mat-stroked-button (click)="logout()">Выйти</button>
+    </ng-container>
+</mat-toolbar>

@@ -1,0 +1,42 @@
+<section class="content">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="content-form">
+        <div class="content-form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Имя пользователя</mat-label>
+                <input matInput type="text" formControlName="username">
+                <mat-error *ngIf="registerForm.get('username').hasError('minlength')">
+                    Логин должен содержать не менее 4 символов
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('username').hasError('maxlength')">
+                    Логин должен содержать не более 20 символов
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="content-form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Пароль</mat-label>
+                <input matInput type="password" formControlName="password">
+                <mat-error *ngIf="registerForm.get('password').hasError('minlength')">
+                    Пароль должен содержать не менее 6 символов
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="content-form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Подтвердите пароль</mat-label>
+                <input matInput type="password" formControlName="passwordConfirmation" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="registerForm.hasError('notSame')">
+                    Пароли не совпадают
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <app-alert></app-alert>
+        <div class="content-form-button">
+            <button class="content-form-button-register" mat-stroked-button [disabled]="loading">
+                <span *ngIf="!loading"></span>
+                Регистрация
+            </button>
+            <a mat-stroked-button routerLink="/login">Отмена</a>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,52 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+mat-toolbar {
+  display: flex;
+  height: 56px;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  margin-bottom: 5px;
+}
+a {
+  text-decoration: none; /* Убирает подчеркивание для ссылок */
+  color: black;
+}
+a:hover {
+  text-decoration: none; /* Добавляем подчеркивание при наведении курсора на ссылку */
+  color: black;
+}
+span {
+  font-weight: bold;
+  @include respond-to(handhelds) {
+    font-size: medium;
+  }
+  @include respond-to(medium-screens) {
+    font-size: large;
+  }
+  @include respond-to(wide-screens) {
+    font-size: x-large;
+  }
+}
+
+button {
+  background-color: white;
+}
+
+.buttonLogin {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.username {
+  @include respond-to(handhelds) {
+    font-size: small;
+  }
+  @include respond-to(medium-screens) {
+    font-size: medium;
+  }
+  @include respond-to(wide-screens) {
+    font-size: large;
+  }
+}

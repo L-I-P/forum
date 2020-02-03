@@ -1,0 +1,24 @@
+<section class="content">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="content-form">
+        <div class="content-form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Имя пользователя</mat-label>
+                <input matInput type="text" formControlName="username">
+            </mat-form-field>
+        </div>
+        <div class="content-form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Пароль</mat-label>
+                <input matInput type="password" formControlName="password">
+            </mat-form-field>
+        </div>
+        <app-alert></app-alert>
+        <div class="content-form-button">
+            <button class="content-form-button-login" mat-stroked-button [disabled]="loading">
+                <span *ngIf="!loading"></span>
+                Авторизация
+            </button>
+            <a mat-stroked-button class="content-form-button-register" routerLink="/register">Регистрация</a>
+        </div>
+    </form>
+</section>

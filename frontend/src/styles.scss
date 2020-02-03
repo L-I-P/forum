@@ -1,0 +1,27 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+font-family: 'Times New Roman';
+}
