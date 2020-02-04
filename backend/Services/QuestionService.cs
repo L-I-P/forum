@@ -47,7 +47,7 @@ namespace backend.Services
                 throw new AppException("Such a question already exists");
 
             DateTime date = DateTime.Today;
-            question.Date = date.ToLongDateString();
+            question.Date = date.ToShortDateString();
 
             await _context.Questions.AddAsync(question);
             await _context.SaveChangesAsync();

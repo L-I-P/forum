@@ -40,8 +40,8 @@ namespace backend.Services
             if (await _context.Comments.AnyAsync(x => x.Description == comment.Description))
                 throw new AppException("Such a comment already exists");
 
-            DateTime date = new DateTime(); 
-            comment.Date = date.ToLongDateString();
+            DateTime date = DateTime.Today; 
+            comment.Date = date.ToShortDateString();
 
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
