@@ -10,8 +10,8 @@ namespace backend.Services
 {
     public interface IQuestionService
     {
-        Task<IEnumerable<Question>> GetAll();
-        Task<IEnumerable<Question>> GetByTopic(string topic);
+        Task<IEnumerable<Question>> GetAll(int page);
+        Task<IEnumerable<Question>> GetByTopic(string topic, int page);
         Task<Question> GetById(int id);
         Task Create(Question question);
         Task Update(Question question);
@@ -26,14 +26,14 @@ namespace backend.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Question>> GetAll()
+        public async Task<IEnumerable<Question>> GetAll(int page)
         {
-            return await _context.Questions.ToListAsync();
+            return await _context.Questions.Skip((page-1) * 10).Take(10).ToListAsync();
         }
 
-        public async Task<IEnumerable<Question>> GetByTopic(string topic)
+        public async Task<IEnumerable<Question>> GetByTopic(string topic, int page)
         {
-            return await _context.Questions.Where(x => x.Topic == topic).ToListAsync();
+            return await _context.Questions.Where(x => x.Topic == topic).Skip((page - 1) * 10).Take(10).ToListAsync();
         }
 
         public async Task<Question> GetById(int id)

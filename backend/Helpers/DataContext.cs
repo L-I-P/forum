@@ -22,7 +22,8 @@ namespace backend.Helpers
             // connect to sql server database
             // options.UseSqlServer(Configuration.GetConnectionString("WebApiDatabaseForum"));
             // connect to postgresql database
-            options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabaseForum"));
+            //options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabaseForum"));
+            options.UseNpgsql("Host=ec2-52-71-122-102.compute-1.amazonaws.com;Port=5432;Username=ajohmagtaptxbj;Password=35989373fe41f8b7a6a48be9199fb59e399265afb5ce6203df900e73b1aafbd4;Database=d4nq23tkvso5bk;");
         }
 
         public DbSet<User> Users { get; set; }

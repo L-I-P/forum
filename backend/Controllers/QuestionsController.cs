@@ -39,18 +39,18 @@ namespace backend.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("Page/{page}")]
+        public async Task<IActionResult> GetAll(int page)
         {
-            var questions = await _questionService.GetAll();
+            var questions = await _questionService.GetAll(page);
             return Ok(questions);
         }
 
         [AllowAnonymous]
-        [HttpGet("Topic/{topic}")]
-        public async Task<IActionResult> GetByTopic(string topic)
+        [HttpGet("Topic/{topic}/Page/{page}")]
+        public async Task<IActionResult> GetByTopic(string topic, int page)
         {
-            var questions = await _questionService.GetByTopic(topic);
+            var questions = await _questionService.GetByTopic(topic, page);
             return Ok(questions);
         }
 
