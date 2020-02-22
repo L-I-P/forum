@@ -43,6 +43,12 @@
                 Вопросы не найдены
             </span>
         </ng-container>
+        <ng-container *ngIf="questions.length === 10">
+            <button class="content-buttonGoTo" mat-stroked-button (click)="goToNextQuestions()">Следующие вопросы</button>
+        </ng-container>
+        <ng-container *ngIf="page !== 1">
+            <button class="content-buttonGoTo" mat-stroked-button (click)="goToPreviousQuestions()">Предыдущие вопросы</button>
+        </ng-container>
     </ng-container>
     <ng-container *ngIf="loading">
         <mat-spinner class="content-spinner"></mat-spinner>

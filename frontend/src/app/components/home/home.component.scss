@@ -161,6 +161,15 @@
       }
     }
 
+    &-buttonGoTo {
+      margin-top: 10px;
+      width: 190px;
+      border-color: #65a3be;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     &-notFound {
       width: 96%;
       display: flex;

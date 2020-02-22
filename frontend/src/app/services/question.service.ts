@@ -10,8 +10,8 @@ export class QuestionService {
   constructor(
     private http: HttpClient) {
   }
-  getQuestions() {
-    return this.http.get<any>(`${environment.apiUrl}/questions`);
+  getQuestions(page: number) {
+    return this.http.get<any>(`${environment.apiUrl}/questions/Page/${page}`);
   }
 
   getQuestion(Id: number) {
@@ -30,7 +30,7 @@ export class QuestionService {
     return this.http.delete<any>(`${environment.apiUrl}/questions/${Id}`);
   }
 
-  getQuestionsByTopic(topic: string) {
-    return this.http.get<any>(`${environment.apiUrl}/questions/Topic/${topic}`);
+  getQuestionsByTopic(topic: string, page: number) {
+    return this.http.get<any>(`${environment.apiUrl}/questions/Topic/${topic}/Page/${page}`);
   }
 }

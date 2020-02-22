@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   searchForm: FormGroup;
   questions: Question[] = [];
   topics: string[] = [];
+  page: number;
   loading = false;
   constructor(
     private router: Router,
@@ -30,12 +31,13 @@ export class HomeComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       topic: ['Все', Validators.required]
     });
+    this.page = 1;
     this.getQuestions();
   }
 
-  private getQuestions() {
+  private getQuestions(page: number = 1) {
     this.loading = true;
-    this.questionService.getQuestions()
+    this.questionService.getQuestions(page)
       .pipe(first())
       .subscribe(
         data => {
@@ -58,13 +60,13 @@ export class HomeComponent implements OnInit {
 
   get f() { return this.searchForm.controls; }
 
-  search() {
+  search(page: number = 1) {
     if (this.searchForm.invalid) {
       return;
     }
     this.loading = true;
     if (this.f.topic.value !== 'Все') {
-      this.questionService.getQuestionsByTopic(this.f.topic.value)
+      this.questionService.getQuestionsByTopic(this.f.topic.value, page)
         .pipe(first())
         .subscribe(
           data => {
@@ -76,9 +78,19 @@ export class HomeComponent implements OnInit {
             this.alertService.error(error);
           });
     } else {
-      this.getQuestions();
+      this.getQuestions(page);
       this.loading = false;
       console.log(this.questions);
     }
+  }
+
+  goToNextQuestions() {
+    this.page++;
+    this.search(this.page);
+  }
+
+  goToPreviousQuestions() {
+    this.page--;
+    this.search(this.page);
   }
 }
